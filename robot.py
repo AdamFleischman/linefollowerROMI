@@ -1,17 +1,25 @@
 from drivetrain import Drivetrain
 from linefollower import LineFollower
+from wpilib import Joystick
 import os
 import wpilib
+from wpilib import TimedRobot
 
-class MyRobot(Drivetrain):  # this is the controller
-    def robotInit(self):
-        self.drivetrain = 1  # something
-        self.linefollower =1 # also something
+
+class MyRobot(TimedRobot):  # this is the controller
+    def robotInit(self):  # something
+        self.controller = Joystick(0)
+        self.drivetrain = Drivetrain()
+        self.linefollower = LineFollower(self.drivetrain)  # also something
 
     def teleopPeriodic(self):
-        pass
+        forward = self.controller.getRawAxis(0)
+        rotate = self.controller.getRawAxis(1)
+        self.drivetrain.move(forward, rotate)
+        self.linefollower.run()
         # pull controller
         # invoke drivetrain, move
+
 
 if __name__ == "__main__":
     os.environ["HALSIMWS_HOST"] = "10.0.0.2"

@@ -1,7 +1,5 @@
-from wpilib import TimedRobot, Joystick, Spark
+from wpilib import Spark
 from wpilib.drive import DifferentialDrive
-import os
-import wpilib
 
 class Drivetrain:
     def __init__(self):
@@ -10,6 +8,4 @@ class Drivetrain:
         self.drivetrain = DifferentialDrive(self.left_motor, self.right_motor)
 
     def move(self, forward, rotate):
-        forward = self.controller.getRawAxis(0)
-        rotate = self.controller.getRawAxis(1)
         self.drivetrain.arcadeDrive(forward, rotate)
