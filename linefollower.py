@@ -13,8 +13,12 @@ class LineFollower:
     def run(self):
         left_data = self.left_sensor.get()
         right_data = self.right_sensor.get()
-        if left_data:
-            self.drivetrain.move(1, 1)
-        elif right_data:
-            self.drivetrain.move(1, -1)
+        print(f"Left: {left_data}, Right: {right_data}")
+        if not left_data and right_data:
+            self.drivetrain.move(.5, 0)
+        elif not right_data and left_data:
+            self.drivetrain.move(-.5, 0)
+        else:
+            self.drivetrain.move(0, .5)
+
         # logic + motor setting
